@@ -1,6 +1,0 @@
-﻿  Source.cpp
-c:\users\djaes-portable\google drive\cesi\projet\projet c\thermetrie\thermetrie\source.cpp(1): error C2873: 'System' : un symbole ne peut pas être utilisé dans une déclaration using
-c:\users\djaes-portable\google drive\cesi\projet\projet c\thermetrie\thermetrie\source.cpp(3): error C3381: 'SplitTest' : les spécificateurs d'accès à l'assembly ne sont disponibles que dans le code compilé à l'aide de l'option /clr
-c:\users\djaes-portable\google drive\cesi\projet\projet c\thermetrie\thermetrie\source.cpp(5): error C2062: type 'void' inattendu
-c:\users\djaes-portable\google drive\cesi\projet\projet c\thermetrie\thermetrie\source.cpp(5): error C2334: jetons inattendus avant '{' ; corps apparent de la fonction ignoré
-c:\users\djaes-portable\google drive\cesi\projet\projet c\thermetrie\thermetrie\source.cpp(35): fatal error C1004: fin de fichier inattendue rencontrée
