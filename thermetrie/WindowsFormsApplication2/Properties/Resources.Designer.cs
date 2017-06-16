@@ -61,7 +61,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 192.168.22.102.
+        ///   Recherche une chaîne localisée semblable à localhost.
         /// </summary>
         internal static string DATABASE_HOST {
             get {
@@ -70,7 +70,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à dbuser.
+        ///   Recherche une chaîne localisée semblable à sensorboard.
         /// </summary>
         internal static string DATABASE_LOGIN {
             get {
@@ -88,7 +88,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à dbuser.
+        ///   Recherche une chaîne localisée semblable à sensorboard.
         /// </summary>
         internal static string DATABASE_PASSWORD {
             get {
