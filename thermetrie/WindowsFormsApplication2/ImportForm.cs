@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using WindowsFormsApplication2.Classes;
 
 namespace WindowsFormsApplication2
 {
@@ -31,17 +32,11 @@ namespace WindowsFormsApplication2
 
                 if (filePicker.ShowDialog() == DialogResult.OK)
                 {
-                    MySqlConnection connection = new MySqlConnection("SERVER=localhost;DATABASE=sensorboard2;UID=sensorboard2;PASSWORD=sensor;");
-
-                    try
-                    {
-                        connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Erreur de connexion à la base de donnée: " + ex.Message);
-                    }
-
+                    //MySqlConnection connection = new MySqlConnection();
+                    MySqlConnection connection = Database.startConnect();
+                    
+                    
+                    // ne pas oublier le commit en fin de requete
                     MySqlTransaction transaction = connection.BeginTransaction();
 
                     Form form = this.ParentForm;
@@ -60,7 +55,7 @@ namespace WindowsFormsApplication2
                     for (int lineNumber = 0; lineNumber < lines.Length; lineNumber++)
                     {
                         String[] columns = lines[lineNumber].Split(' ');
-                         throw new Exception("Une erreur L " + lineNumber + " !");
+                        if(columns.Length != 5) throw new Exception("Une erreur L " + lineNumber + " !");
                     }
 
                     foreach (String line in lines)
@@ -72,18 +67,18 @@ namespace WindowsFormsApplication2
 
 
                         MySqlCommand command = connection.CreateCommand();
-                        command.CommandText = "INSERT INTO data (sensor,humidity,temperature,import_date,data_date)VALUES(@sensor,@humidity,@temperature,@import_date,@data_date)";
+                        command.CommandText = "INSERT INTO data (sensor_id,humidity,temperature,import_date,data_date)VALUES(@sensor_id,@humidity,@temperature,@import_date,@data_date)";
                         
 
                         command.Parameters.AddWithValue("@humidity", humidity);
                         command.Parameters.AddWithValue("@data_date", dataDate);
                         command.Parameters.AddWithValue("@import_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        command.Parameters.AddWithValue("@sensor", sensor);
+                        command.Parameters.AddWithValue("@sensor_id", sensor);
                         command.Parameters.AddWithValue("@temperature", temperature);
                         command.ExecuteNonQuery();
                         
                     }
-
+                    transaction.Commit();
                     connection.Close();
 
                 }

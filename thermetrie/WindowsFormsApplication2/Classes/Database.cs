@@ -10,19 +10,15 @@ namespace WindowsFormsApplication2.Classes
     class Database
     {
 
-
         public static  void insert(String query, Dictionary<String, String> parameters)
         {
-            MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";");
-            connection.Open();
+            MySqlConnection connection = startConnect();
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
-
             foreach (KeyValuePair<String, String> kvp in parameters)
             {
                 command.Parameters.AddWithValue(kvp.Key, kvp.Value);
             }
-
             command.ExecuteNonQuery();
             connection.Close();
         }
@@ -36,32 +32,34 @@ namespace WindowsFormsApplication2.Classes
         /// <returns></returns>
         public static List<Dictionary<String, String>> select(String query,Dictionary<String,String> parameters)
         {
-            
             List<Dictionary<String, String>> results = new List<Dictionary<String, String>>();
-            MySqlConnection connection = new MySqlConnection("SERVER="+Properties.Resources.DATABASE_HOST+";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN  +";PASSWORD="+Properties.Resources.DATABASE_PASSWORD+";");
-            connection.Open();
+            MySqlConnection connection = startConnect();
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
-
-            foreach(KeyValuePair<String,String> kvp in parameters){
+            foreach (KeyValuePair<String, String> kvp in parameters)
+            {
                 command.Parameters.AddWithValue(kvp.Key, kvp.Value);
             }
-
-            MySqlDataReader resultset =  command.ExecuteReader();
-
+            MySqlDataReader resultset = command.ExecuteReader();
             while (resultset.Read())
             {
                 Dictionary<String, String> line = new Dictionary<String, String>();
 
-                for(int i=0;i< resultset.FieldCount; i++)
+                for (int i = 0; i < resultset.FieldCount; i++)
                 {
                     line[resultset.GetName(i)] = resultset.GetValue(i).ToString();
                 }
                 results.Add(line);
             }
-
             connection.Close();
             return results;
+        }
+
+        public static MySqlConnection startConnect()
+        {
+            MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";");
+            connection.Open();
+            return connection;
         }
     }
 }
