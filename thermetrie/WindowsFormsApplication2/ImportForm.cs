@@ -34,10 +34,9 @@ namespace WindowsFormsApplication2
                 {
                     //MySqlConnection connection = new MySqlConnection();
                     MySqlConnection connection = Database.startConnect();
-                    
-                    
                     // ne pas oublier le commit en fin de requete
                     MySqlTransaction transaction = connection.BeginTransaction();
+
 
                     Form form = this.ParentForm;
                     MainForm main = (MainForm)form;
@@ -64,20 +63,9 @@ namespace WindowsFormsApplication2
                         String humidity = Regex.Replace(columns[4], "%", "");
                         String temperature = columns[3];
                         String dataDate = columns[1] + " " + columns[2];
-
-
-                        MySqlCommand command = connection.CreateCommand();
-                        command.CommandText = "INSERT INTO data (sensor_id,humidity,temperature,import_date,data_date)VALUES(@sensor_id,@humidity,@temperature,@import_date,@data_date)";
-                        
-
-                        command.Parameters.AddWithValue("@humidity", humidity);
-                        command.Parameters.AddWithValue("@data_date", dataDate);
-                        command.Parameters.AddWithValue("@import_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        command.Parameters.AddWithValue("@sensor_id", sensor);
-                        command.Parameters.AddWithValue("@temperature", temperature);
-                        command.ExecuteNonQuery();
-                        
+                        Database.insertData(connection, humidity, dataDate, sensor, temperature);
                     }
+
                     transaction.Commit();
                     connection.Close();
 
