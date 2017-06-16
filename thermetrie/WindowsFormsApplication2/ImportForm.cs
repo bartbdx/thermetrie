@@ -32,7 +32,7 @@ namespace WindowsFormsApplication2
 
                 if (filePicker.ShowDialog() == DialogResult.OK)
                 {
-                    //MySqlConnection connection = new MySqlConnection();
+                   
                     MySqlConnection connection = Database.startConnect();
                     
                     
