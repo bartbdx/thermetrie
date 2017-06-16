@@ -27,7 +27,7 @@ namespace WindowsFormsApplication2
             {
                 OpenFileDialog filePicker = new OpenFileDialog();
                 Form parent = this.ParentForm;
-
+                alertImport.Text = "";
 
 
                 if (filePicker.ShowDialog() == DialogResult.OK)
@@ -68,6 +68,7 @@ namespace WindowsFormsApplication2
 
                     transaction.Commit();
                     connection.Close();
+                    alertImport.Text = "Import terminé avec succès";
 
                 }
 

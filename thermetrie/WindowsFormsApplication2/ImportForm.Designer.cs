@@ -32,6 +32,7 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.alertImport = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,13 +77,24 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.alertImport);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnImportFile);
             this.panel1.Controls.Add(this.materialLabel2);
             this.panel1.Location = new System.Drawing.Point(74, 145);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(456, 150);
+            this.panel1.Size = new System.Drawing.Size(456, 228);
             this.panel1.TabIndex = 6;
+            // 
+            // alertImport
+            // 
+            this.alertImport.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.alertImport.ForeColor = System.Drawing.Color.Red;
+            this.alertImport.Location = new System.Drawing.Point(110, 156);
+            this.alertImport.Name = "alertImport";
+            this.alertImport.Size = new System.Drawing.Size(254, 23);
+            this.alertImport.TabIndex = 6;
+            this.alertImport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ImportForm
             // 
@@ -107,5 +119,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label alertImport;
     }
 }
