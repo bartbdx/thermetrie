@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsApplication2.Classes
 {
@@ -60,6 +57,8 @@ namespace WindowsFormsApplication2.Classes
             connection.Close();
             return results;
         }
+
+        
 
         public static void insertData(MySqlConnection connection, String humidity, String dataDate, String sensor, String temperature)
         {

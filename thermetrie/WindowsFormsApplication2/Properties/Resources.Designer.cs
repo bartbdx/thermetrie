@@ -61,7 +61,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 192.168.22.102.
+        ///   Recherche une chaîne localisée semblable à 192.168.1.19.
         /// </summary>
         internal static string DATABASE_HOST {
             get {

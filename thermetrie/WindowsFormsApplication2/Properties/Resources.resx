@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DATABASE_HOST" xml:space="preserve">
-    <value>192.168.22.102</value>
+    <value>192.168.1.19</value>
   </data>
   <data name="DATABASE_LOGIN" xml:space="preserve">
     <value>dbuser</value>
