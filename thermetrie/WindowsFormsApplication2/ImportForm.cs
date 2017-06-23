@@ -32,7 +32,7 @@ namespace WindowsFormsApplication2
 
                 if (filePicker.ShowDialog() == DialogResult.OK)
                 {
-                    MySqlConnection connection = new MySqlConnection("SERVER=localhost;DATABASE=sensorboard;UID=sensorboard;PASSWORD=sensorboard;");
+                    MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";CharSet=utf8;");
 
                     try
                     {
