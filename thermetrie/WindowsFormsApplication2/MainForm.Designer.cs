@@ -37,6 +37,12 @@
             this.btnSynthesis = new MaterialSkin.Controls.MaterialRaisedButton();
             this.plContent = new System.Windows.Forms.Panel();
             this.cbSensor = new System.Windows.Forms.ComboBox();
+            this.dtEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtStart = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.sensorConf = new System.Windows.Forms.Button();
+            this.Title = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -44,8 +50,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.125F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.875F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.75F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.25F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.plContent, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -70,7 +76,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 480);
+            this.panel1.Size = new System.Drawing.Size(174, 480);
             this.panel1.TabIndex = 0;
             // 
             // btnConfiguration
@@ -140,35 +146,101 @@
             // 
             // plContent
             // 
-            this.plContent.AutoScroll = true;
             this.plContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plContent.Location = new System.Drawing.Point(177, 0);
-            this.plContent.Margin = new System.Windows.Forms.Padding(0);
+            this.plContent.Location = new System.Drawing.Point(177, 3);
             this.plContent.Name = "plContent";
-            this.plContent.Size = new System.Drawing.Size(623, 480);
+            this.plContent.Size = new System.Drawing.Size(620, 474);
             this.plContent.TabIndex = 1;
             // 
             // cbSensor
             // 
             this.cbSensor.FormattingEnabled = true;
-            this.cbSensor.Location = new System.Drawing.Point(503, 33);
+            this.cbSensor.Location = new System.Drawing.Point(149, 32);
             this.cbSensor.Name = "cbSensor";
-            this.cbSensor.Size = new System.Drawing.Size(149, 21);
+            this.cbSensor.Size = new System.Drawing.Size(124, 21);
             this.cbSensor.TabIndex = 1;
+            this.cbSensor.SelectedIndexChanged += new System.EventHandler(this.cbSensor_SelectedIndexChanged);
+            // 
+            // dtEnd
+            // 
+            this.dtEnd.Location = new System.Drawing.Point(588, 33);
+            this.dtEnd.Name = "dtEnd";
+            this.dtEnd.Size = new System.Drawing.Size(166, 20);
+            this.dtEnd.TabIndex = 2;
+            this.dtEnd.ValueChanged += new System.EventHandler(this.cbSensor_SelectedIndexChanged);
+            // 
+            // dtStart
+            // 
+            this.dtStart.Location = new System.Drawing.Point(385, 33);
+            this.dtStart.Name = "dtStart";
+            this.dtStart.Size = new System.Drawing.Size(165, 20);
+            this.dtStart.TabIndex = 3;
+            this.dtStart.ValueChanged += new System.EventHandler(this.cbSensor_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(355, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "De";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(562, 37);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "à";
+            // 
+            // sensorConf
+            // 
+            this.sensorConf.Location = new System.Drawing.Point(79, 31);
+            this.sensorConf.Name = "sensorConf";
+            this.sensorConf.Size = new System.Drawing.Size(58, 23);
+            this.sensorConf.TabIndex = 7;
+            this.sensorConf.Text = "Capteur";
+            this.sensorConf.UseVisualStyleBackColor = true;
+            this.sensorConf.Click += new System.EventHandler(this.sensorConf_Click);
+            // 
+            // Title
+            // 
+            this.Title.AutoSize = true;
+            this.Title.BackColor = System.Drawing.Color.Transparent;
+            this.Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title.ForeColor = System.Drawing.Color.White;
+            this.Title.Location = new System.Drawing.Point(3, 2);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(95, 20);
+            this.Title.TabIndex = 8;
+            this.Title.Text = "Thermetrie";
+            this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 540);
+            this.Controls.Add(this.Title);
+            this.Controls.Add(this.sensorConf);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dtStart);
+            this.Controls.Add(this.dtEnd);
             this.Controls.Add(this.cbSensor);
             this.Controls.Add(this.tableLayoutPanel1);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "MainForm";
-            this.Text = "SensorBoard";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -183,6 +255,12 @@
         private MaterialSkin.Controls.MaterialRaisedButton btnConfiguration;
         private System.Windows.Forms.Panel plContent;
         private System.Windows.Forms.ComboBox cbSensor;
+        private System.Windows.Forms.DateTimePicker dtEnd;
+        private System.Windows.Forms.DateTimePicker dtStart;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button sensorConf;
+        private System.Windows.Forms.Label Title;
     }
 }
 

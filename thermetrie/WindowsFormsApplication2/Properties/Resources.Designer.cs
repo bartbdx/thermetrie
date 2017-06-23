@@ -61,7 +61,17 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 192.168.1.19.
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cross {
+            get {
+                object obj = ResourceManager.GetObject("cross", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 127.0.0.1.
         /// </summary>
         internal static string DATABASE_HOST {
             get {
@@ -70,7 +80,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à dbuser.
+        ///   Recherche une chaîne localisée semblable à sensorboard.
         /// </summary>
         internal static string DATABASE_LOGIN {
             get {
@@ -88,11 +98,21 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à dbuser.
+        ///   Recherche une chaîne localisée semblable à sensorboard.
         /// </summary>
         internal static string DATABASE_PASSWORD {
             get {
                 return ResourceManager.GetString("DATABASE_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_edit {
+            get {
+                object obj = ResourceManager.GetObject("icon_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

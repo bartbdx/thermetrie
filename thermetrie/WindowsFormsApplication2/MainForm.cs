@@ -1,7 +1,6 @@
 ﻿
 using MaterialSkin;
 using MaterialSkin.Controls;
-using SensorBoard;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,16 +20,19 @@ namespace WindowsFormsApplication2
         ExportForm export;
         DataForm data;
         ConfigurationForm configuration;
-        SyntForm synthesis;
+        SyntheseForm synthesis;
+        SensorForm sensorForm;
+
 
         public MainForm()
         {
             InitializeComponent();
+            //custom color 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.Blue600, Primary.Blue600, Accent.LightBlue200, TextShade.WHITE);
-
+            
             //Instantiation du formulaire enfant
             import = new ImportForm();
             //Définition en formulaire inclus
@@ -45,9 +47,10 @@ namespace WindowsFormsApplication2
             data.TopLevel = false;
             data.Dock = DockStyle.Fill;
             plContent.Controls.Add(data);
+            
 
             //Idem pour les autres formulaires
-            synthesis = new SyntForm();
+            synthesis = new SyntheseForm();
             synthesis.TopLevel = false;
             synthesis.Dock = DockStyle.Fill;
             plContent.Controls.Add(synthesis);
@@ -65,12 +68,13 @@ namespace WindowsFormsApplication2
             plContent.Controls.Add(configuration);
 
             //Idem pour les autres formulaires
-            data = new DataForm();
-            data.TopLevel = false;
-            data.Dock = DockStyle.Fill;
-            plContent.Controls.Add(data);
+            sensorForm = new SensorForm();
+            sensorForm.TopLevel = false;
+            sensorForm.Dock = DockStyle.Fill;
+            plContent.Controls.Add(sensorForm);
 
             synthesis.Show();
+            synthesis.refreshSynthese();
 
             Dictionary<String, String> parameters = new Dictionary<String, String>();
         
@@ -78,6 +82,9 @@ namespace WindowsFormsApplication2
 
             cbSensor.DisplayMember = "Text";
             cbSensor.ValueMember = "Name";
+
+            cbSensor.Items.Add(new MenuItem() { Text="",Name="" });
+
             foreach (Dictionary<String,String> line in lines)
             {
                 MenuItem item = new MenuItem();
@@ -86,6 +93,26 @@ namespace WindowsFormsApplication2
                 cbSensor.Items.Add(item);
             }
 
+
+            data.refreshData();
+
+
+            
+            dtStart.Value = new DateTime(DateTime.Now.Year, 1, 1);
+            dtEnd.Value = DateTime.Now.AddDays(1);
+
+        }
+
+     
+       
+        public DateTime getEndDate()
+        {
+            return dtEnd.Value;
+        }
+
+        public DateTime getStartDate()
+        {
+            return dtStart.Value;
         }
 
         private void loadImport(object sender, EventArgs e)
@@ -105,12 +132,19 @@ namespace WindowsFormsApplication2
         /// Retourne la valeur du capteur sélectionné
         /// </summary>
         /// <returns></returns>
-        public String getSensor()
+        public String getSensorId()
         {
             if (cbSensor.SelectedItem == null) return "";
             MenuItem item = (MenuItem)cbSensor.SelectedItem;
             return item.Name;
         }
+        public string getSensorName()
+        {
+            if (cbSensor.SelectedItem == null) return "";
+            return ((MenuItem)this.cbSensor.SelectedItem).Text;
+        }
+
+
 
 
         /// <summary>
@@ -126,6 +160,7 @@ namespace WindowsFormsApplication2
         {
             hideForms();
             synthesis.Show();
+            synthesis.refreshSynthese();
         }
 
         private void btnRapport_Click(object sender, EventArgs e)
@@ -138,6 +173,22 @@ namespace WindowsFormsApplication2
         {
             hideForms();
             configuration.Show();
+        }
+
+        private void cbSensor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dtStart.Value > dtEnd.Value) MessageBox.Show("Date de fin inférieure à date de début");
+            data.refreshData();
+            synthesis.refreshSynthese();
+        }
+
+        private void sensorConf_Click(object sender, EventArgs e)
+        {
+            hideForms();
+            sensorForm.Show();
+            sensorForm.refreshSensor();
+
+
         }
     }
  }

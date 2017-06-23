@@ -28,61 +28,142 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgData = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.errorList = new System.Windows.Forms.Label();
+            this.dataDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sensor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.humidity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.temperature = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgData
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 12);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(10);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Open Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(585, 449);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dgData.AllowUserToAddRows = false;
+            this.dgData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgData.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.dgData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataDate,
+            this.sensor,
+            this.uid,
+            this.humidity,
+            this.temperature,
+            this.delete});
+            this.dgData.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgData.Location = new System.Drawing.Point(0, 90);
+            this.dgData.Name = "dgData";
+            this.dgData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dgData.ShowEditingIcon = false;
+            this.dgData.Size = new System.Drawing.Size(620, 384);
+            this.dgData.TabIndex = 0;
+            this.dgData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellClick);
+            this.dgData.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgData_UserDeletingRow);
+            this.dgData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgData_KeyDown);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // errorList
+            // 
+            this.errorList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.errorList.Location = new System.Drawing.Point(0, 0);
+            this.errorList.Name = "errorList";
+            this.errorList.Size = new System.Drawing.Size(620, 32);
+            this.errorList.TabIndex = 1;
+            this.errorList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dataDate
+            // 
+            this.dataDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataDate.FillWeight = 120F;
+            this.dataDate.HeaderText = "Date des données";
+            this.dataDate.MinimumWidth = 120;
+            this.dataDate.Name = "dataDate";
+            this.dataDate.ReadOnly = true;
+            this.dataDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataDate.Width = 120;
+            // 
+            // sensor
+            // 
+            this.sensor.HeaderText = "Capteur";
+            this.sensor.MinimumWidth = 100;
+            this.sensor.Name = "sensor";
+            this.sensor.ReadOnly = true;
+            // 
+            // uid
+            // 
+            this.uid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.uid.FillWeight = 140F;
+            this.uid.HeaderText = "UID Capteur";
+            this.uid.MinimumWidth = 140;
+            this.uid.Name = "uid";
+            this.uid.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.uid.Width = 140;
+            // 
+            // humidity
+            // 
+            this.humidity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.humidity.FillWeight = 50F;
+            this.humidity.HeaderText = "Humidité";
+            this.humidity.MinimumWidth = 50;
+            this.humidity.Name = "humidity";
+            this.humidity.ReadOnly = true;
+            this.humidity.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.humidity.Width = 50;
+            // 
+            // temperature
+            // 
+            this.temperature.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.temperature.FillWeight = 50F;
+            this.temperature.HeaderText = "Temp";
+            this.temperature.MinimumWidth = 50;
+            this.temperature.Name = "temperature";
+            this.temperature.ReadOnly = true;
+            this.temperature.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.temperature.Width = 50;
+            // 
+            // delete
+            // 
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.delete.FillWeight = 45F;
+            this.delete.HeaderText = "Supp";
+            this.delete.MinimumWidth = 45;
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.delete.Width = 45;
+            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(623, 480);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(620, 474);
+            this.Controls.Add(this.errorList);
+            this.Controls.Add(this.dgData);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DataForm";
             this.Text = "DataForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgData;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label errorList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sensor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn uid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn humidity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn temperature;
+        private System.Windows.Forms.DataGridViewImageColumn delete;
     }
 }

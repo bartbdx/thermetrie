@@ -1,31 +1,86 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication2.Classes
 {
     class Database
     {
-        public static MySqlConnection startConnect()
+        MySqlConnection connection;
+
+        /// <summary>
+        /// Alias Insertion en base de données
+        /// </summary>
+        /// <param name="query">requete SQL</param>
+        /// <param name="parameters">parametres associés</param>
+        public static void quickExecute(String query, Dictionary<String, String> parameters)
         {
-            MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";");
-            connection.Open();
-            return connection;
+            Database db = new Database();
+            db.connect();
+            db.execute(query, parameters);
+            db.disconnect();
         }
 
-        public static  void insert(String query, Dictionary<String, String> parameters)
+
+
+        /// <summary>
+        /// Connexion à la base avec les constantes prédéfinies dans ressources.resx
+        /// </summary>
+        public void connect()
         {
-            MySqlConnection connection = startConnect();
+            connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";CharSet=utf8;");
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Erreur d'accée a la base de donnée");
+            }
+        }
+
+        /// <summary>
+        /// Déconnexion de la base instanciée
+        /// </summary>
+        public void disconnect()
+        {
+            connection.Close();
+        }
+
+        /// <summary>
+        /// Méthode d'insertion de donnée en base (instanciée)
+        /// </summary>
+        /// <param name="query">requete SQL</param>
+        /// <param name="parameters"></param>
+        public void execute(String query, Dictionary<String, String> parameters)
+        {
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
+
             foreach (KeyValuePair<String, String> kvp in parameters)
             {
                 command.Parameters.AddWithValue(kvp.Key, kvp.Value);
             }
+
             command.ExecuteNonQuery();
-            connection.Close();
+
+
         }
 
+
+        /// <summary>
+        /// Effectue une requete type select et retourne une liste de dictionnaire de résultats
+        /// </summary>
+        /// <param name="query">requete SQL</param>
+        /// <returns></returns>
+        public static List<Dictionary<String, String>> select(String query)
+        {
+            return select(query, new Dictionary<String, String>());
+        }
 
         /// <summary>
         /// Effectue une requete type select et retourne une liste de dictionnaire de résultats
@@ -33,17 +88,34 @@ namespace WindowsFormsApplication2.Classes
         /// <param name="query">Requete SQL</param>
         /// <param name="parameters">Valeurs de la requete</param>
         /// <returns></returns>
-        public static List<Dictionary<String, String>> select(String query,Dictionary<String,String> parameters)
+        public static List<Dictionary<String, String>> select(String query, Dictionary<String, String> parameters)
         {
+
             List<Dictionary<String, String>> results = new List<Dictionary<String, String>>();
-            MySqlConnection connection = startConnect();
+            MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";");
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Erreur d'accée a la base de donnée");
+            }
+
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
+
             foreach (KeyValuePair<String, String> kvp in parameters)
             {
                 command.Parameters.AddWithValue(kvp.Key, kvp.Value);
             }
-            MySqlDataReader resultset = command.ExecuteReader();
+            MySqlDataReader resultset = null;
+
+
+            resultset = command.ExecuteReader();
+
+
+
             while (resultset.Read())
             {
                 Dictionary<String, String> line = new Dictionary<String, String>();
@@ -54,24 +126,9 @@ namespace WindowsFormsApplication2.Classes
                 }
                 results.Add(line);
             }
+
             connection.Close();
             return results;
-        }
-
-        
-
-        public static void insertData(MySqlConnection connection, String humidity, String dataDate, String sensor, String temperature)
-        {
-            
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO data (sensor_id,humidity,temperature,import_date,data_date)VALUES(@sensor_id,@humidity,@temperature,@import_date,@data_date)";
-            
-            command.Parameters.AddWithValue("@humidity", humidity);
-            command.Parameters.AddWithValue("@data_date", dataDate);
-            command.Parameters.AddWithValue("@import_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            command.Parameters.AddWithValue("@sensor_id", sensor);
-            command.Parameters.AddWithValue("@temperature", temperature);
-            command.ExecuteNonQuery();            
         }
     }
 }
