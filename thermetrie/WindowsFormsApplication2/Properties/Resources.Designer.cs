@@ -80,7 +80,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à sensorboard.
+        ///   Recherche une chaîne localisée semblable à root.
         /// </summary>
         internal static string DATABASE_LOGIN {
             get {
@@ -89,7 +89,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à sensorboard.
+        ///   Recherche une chaîne localisée semblable à sensorboard2.
         /// </summary>
         internal static string DATABASE_NAME {
             get {
@@ -98,7 +98,7 @@ namespace WindowsFormsApplication2.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à sensorboard.
+        ///   Recherche une chaîne localisée semblable à root.
         /// </summary>
         internal static string DATABASE_PASSWORD {
             get {
