@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using WindowsFormsApplication2.Classes;
 
 namespace WindowsFormsApplication2
@@ -100,6 +102,13 @@ namespace WindowsFormsApplication2
             {
                 series.Points.Clear();
             }
+        }
+
+        public MemoryStream getChart()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            graph.SaveImage(memoryStream, ChartImageFormat.Png);
+            return memoryStream; 
         }
 
         private void label1_Click(object sender, EventArgs e)

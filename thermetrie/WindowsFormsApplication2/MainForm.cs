@@ -21,7 +21,7 @@ namespace WindowsFormsApplication2
         ExportForm export;
         DataForm data;
         ConfigurationForm configuration;
-        SyntheseForm synthesis;
+        public SyntheseForm synthesis;
         SensorForm sensorForm;
 
 
@@ -112,6 +112,8 @@ namespace WindowsFormsApplication2
             return dtEnd.Value;
         }
 
+       
+
         public DateTime getStartDate()
         {
             return dtStart.Value;
@@ -133,6 +135,8 @@ namespace WindowsFormsApplication2
             if (cbSensor.SelectedItem == null) return "";
             return ((MenuItem)this.cbSensor.SelectedItem).Text;
         }
+
+        
 
         /// <summary>
         /// Cache les formulaires

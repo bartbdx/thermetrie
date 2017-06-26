@@ -29,8 +29,9 @@ namespace WindowsFormsApplication2
                 saveFile.DefaultExt = cbPDF.Checked ? "pdf" : "csv";
                 String name = main.getSensorName();
                 name = Function.slugify(name + DateTime.Now);
-                if (main.getSensorName() == "") name = "allSensor" + DateTime.Now;
+                if (main.getSensorName() == "") name = "allSensor";
                 saveFile.FileName = name;
+         
 
                 if (cbExcel.Checked)
                 {
@@ -146,6 +147,8 @@ namespace WindowsFormsApplication2
                         String humiMin = Function.PlusPetiteValeur(humi).ToString(".") + " %";
                         String humiMax = Function.PlusGrandeValeur(humi).ToString(".") + " %";
                         String humiMoy = Function.valeurMoyenne(humi).ToString(".") + " %";
+                        TimeSpan Diff = end - start;
+                        
 
                         FileStream fs = new FileStream(saveFile.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
                         Document doc = new Document(PageSize.A4, 30, 30, 30, 30);
@@ -161,7 +164,20 @@ namespace WindowsFormsApplication2
                         doc.Add(new Paragraph("Rapport Temperature et Humidité"));
                         doc.Add(new Paragraph("Date de rapport : " + DateTime.Now));
                         List infos = new List();
+                        infos.IndentationLeft = 20f;
+                        infos.Add("Date de debut : " + start);
+                        infos.Add("Date de fin : " + end);
+                        infos.Add("Nom de capteur : " + sensorName);
+                        infos.Add("Uid capteur : " + sensorUID);
+                        infos.Add("T° min : " + tempMin + " -- T° max : "+ tempMax + " -- T° moyenne :" + tempMoy);
+                        infos.Add("Hum. min : " + humiMin + "  -- hum. max : " + humiMax + " -- hum.moyenne : " + humiMoy);
+                        infos.Add("Periode ( en jours) : " + Diff.Days);
+                        infos.Add("Periode ( en heures) : " + Diff.TotalHours);
+                        doc.Add(infos);
 
+                        Image img = Image.GetInstance(main.synthesis.getChart().GetBuffer());
+                        img.ScalePercent(75f);
+                        doc.Add(img);
 
                         doc.Close();
                         writer.Close();
@@ -169,7 +185,7 @@ namespace WindowsFormsApplication2
                         String content = " Bosses faineant !!!!";
                         String recipients = "philippe.lavielle@viacesi.fr";
                         fs.Close();
-                        if (chkMailFile.Checked) Function.send_report(subject, content, recipients, name);
+                        if (chkMailFile.Checked) Function.send_report(subject, content, name);
                         MessageBox.Show("Export effectué avec succès sur " + saveFile.FileName);
                         if (chkOpenFile.Checked) Process.Start(saveFile.FileName);
                     }
