@@ -41,6 +41,8 @@ namespace WindowsFormsApplication2
             Function.AddUpdateAppSettings("bddPassword", MDPBDDField.Text);
             Function.AddUpdateAppSettings("pathExport", PathExportFileField.Text);
             Function.AddUpdateAppSettings("mailExport", ExportMailAddField.Text);
+            Application.Restart();
+            Environment.Exit(0);
         }
     }
 }

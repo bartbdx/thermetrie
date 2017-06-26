@@ -102,7 +102,9 @@ namespace WindowsFormsApplication2.Classes
             }
             catch
             {
-                MessageBox.Show("Erreur d'accée a la base de donnée");
+                throw new Exception("Erreur d'accée a la base de donnée  ");
+                //MessageBox.Show("Erreur d'accée a la base de donnée");
+                return results;
             }
 
             MySqlCommand command = connection.CreateCommand();

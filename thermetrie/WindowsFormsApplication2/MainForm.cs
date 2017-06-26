@@ -1,6 +1,7 @@
 ﻿
 using MaterialSkin;
 using MaterialSkin.Controls;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,38 +74,39 @@ namespace WindowsFormsApplication2
             sensorForm.Dock = DockStyle.Fill;
             plContent.Controls.Add(sensorForm);
 
-            synthesis.Show();
-            synthesis.refreshSynthese();
 
-            Dictionary<String, String> parameters = new Dictionary<String, String>();
-        
-            List<Dictionary<String, String>> lines = Database.select("SELECT id,label FROM sensor",parameters);
-
-            cbSensor.DisplayMember = "Text";
-            cbSensor.ValueMember = "Name";
-
-            cbSensor.Items.Add(new MenuItem() { Text="",Name="" });
-
-            foreach (Dictionary<String,String> line in lines)
+            try
             {
-                MenuItem item = new MenuItem();
-                item.Text = line["label"];
-                item.Name = line["id"];
-                cbSensor.Items.Add(item);
+                Dictionary<String, String> parameters = new Dictionary<String, String>();
+
+                List<Dictionary<String, String>> lines = Database.select("SELECT id,label FROM sensor", parameters);
+                cbSensor.DisplayMember = "Text";
+                cbSensor.ValueMember = "Name";
+
+                cbSensor.Items.Add(new MenuItem() { Text = "", Name = "" });
+
+                foreach (Dictionary<String, String> line in lines)
+                {
+                    MenuItem item = new MenuItem();
+                    item.Text = line["label"];
+                    item.Name = line["id"];
+                    cbSensor.Items.Add(item);
+                }
+                synthesis.Show();
+                synthesis.refreshSynthese();
+                dtStart.Value = new DateTime(DateTime.Now.Year, 1, 1);
+                dtEnd.Value = DateTime.Now.AddDays(1);
             }
-
-
-            data.refreshData();
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                configuration.Show();
+                configuration.refreshConfig();                
+            }
             
-            dtStart.Value = new DateTime(DateTime.Now.Year, 1, 1);
-            dtEnd.Value = DateTime.Now.AddDays(1);
+            
 
         }
-
-     
-       
         public DateTime getEndDate()
         {
             return dtEnd.Value;
@@ -115,19 +117,7 @@ namespace WindowsFormsApplication2
             return dtStart.Value;
         }
 
-        private void loadImport(object sender, EventArgs e)
-        {
-            hideForms();
-            import.Show();
-        }
-
-
-        private void btnData_Click(object sender, EventArgs e)
-        {
-            hideForms();
-            data.Show();
-        }
-
+        
         /// <summary>
         /// Retourne la valeur du capteur sélectionné
         /// </summary>
@@ -144,17 +134,33 @@ namespace WindowsFormsApplication2
             return ((MenuItem)this.cbSensor.SelectedItem).Text;
         }
 
-
-
-
         /// <summary>
-        /// Cache les formulaire
+        /// Cache les formulaires
         /// </summary>
         private void hideForms()
         {
             foreach (Control form in plContent.Controls)
                 form.Hide();
         }
+
+
+
+
+
+        private void loadImport(object sender, EventArgs e)
+        {
+            hideForms();
+            import.Show();
+        }
+
+
+        private void btnData_Click(object sender, EventArgs e)
+        {
+            hideForms();
+            data.Show();
+            data.refreshData();
+        }
+
 
         private void btnSynthesis_Click(object sender, EventArgs e)
         {
