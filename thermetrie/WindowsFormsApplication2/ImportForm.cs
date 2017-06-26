@@ -32,8 +32,9 @@ namespace WindowsFormsApplication2
 
                 if (filePicker.ShowDialog() == DialogResult.OK)
                 {
-                    MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";CharSet=utf8;");
-
+                    MySqlConnection connection = new MySqlConnection("SERVER=" + Function.ReadSetting("bddAddress") 
+                        + ";DATABASE=" + Function.ReadSetting("bddName") + ";UID=" + Function.ReadSetting("bddLogin") 
+                        + ";PASSWORD=" + Function.ReadSetting("bddPassword") + ";CharSet=utf8;");
                     try
                     {
                         connection.Open();
@@ -42,9 +43,6 @@ namespace WindowsFormsApplication2
                     {
                         throw new Exception("Erreur de connexion à la base de donnée: " + ex.Message);
                     }
-
-
-
                     Form form = this.ParentForm;
                     MainForm main = (MainForm)form;
                     String sensorId = main.getSensorId();

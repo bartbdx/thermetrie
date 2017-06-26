@@ -32,7 +32,8 @@ namespace WindowsFormsApplication2.Classes
         /// </summary>
         public void connect()
         {
-            connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";CharSet=utf8;");
+            connection = new MySqlConnection("SERVER=" + Function.ReadSetting("bddAddress") + ";DATABASE=" + Function.ReadSetting("bddName") 
+                + ";UID=" + Function.ReadSetting("bddLogin") + ";PASSWORD=" + Function.ReadSetting("bddPassword") + ";CharSet=utf8;");
             try
             {
                 connection.Open();
@@ -92,7 +93,9 @@ namespace WindowsFormsApplication2.Classes
         {
 
             List<Dictionary<String, String>> results = new List<Dictionary<String, String>>();
-            MySqlConnection connection = new MySqlConnection("SERVER=" + Properties.Resources.DATABASE_HOST + ";DATABASE=" + Properties.Resources.DATABASE_NAME + ";UID=" + Properties.Resources.DATABASE_LOGIN + ";PASSWORD=" + Properties.Resources.DATABASE_PASSWORD + ";");
+            MySqlConnection connection = new MySqlConnection("SERVER=" + Function.ReadSetting("bddAddress") 
+                + ";DATABASE=" + Function.ReadSetting("bddName")+ ";UID=" + Function.ReadSetting("bddLogin") 
+                + ";PASSWORD=" + Function.ReadSetting("bddPassword") + ";CharSet=utf8;");
             try
             {
                 connection.Open();

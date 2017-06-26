@@ -173,6 +173,7 @@ namespace WindowsFormsApplication2
         {
             hideForms();
             configuration.Show();
+            configuration.refreshConfig();
         }
 
         private void cbSensor_SelectedIndexChanged(object sender, EventArgs e)
