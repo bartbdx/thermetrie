@@ -79,7 +79,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnImportFile);
             this.panel1.Controls.Add(this.materialLabel2);
-            this.panel1.Location = new System.Drawing.Point(12, 90);
+            this.panel1.Location = new System.Drawing.Point(79, 151);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(456, 150);
             this.panel1.TabIndex = 6;
@@ -88,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 356);
+            this.ClientSize = new System.Drawing.Size(620, 474);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ImportForm";
