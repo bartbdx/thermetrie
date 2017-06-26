@@ -84,6 +84,7 @@ namespace WindowsFormsApplication2
 
                         File.WriteAllText(saveFile.FileName, stream, Encoding.UTF8);
                         MessageBox.Show("Export effectué avec succès sur " + saveFile.FileName);
+
                         if (chkOpenFile.Checked) Process.Start(saveFile.FileName);
                     }
                 }
@@ -168,7 +169,7 @@ namespace WindowsFormsApplication2
                         String content = " Bosses faineant !!!!";
                         String recipients = "philippe.lavielle@viacesi.fr";
                         fs.Close();
-                        Function.send_report(subject, content, recipients, "Rapport.pdf");
+                        if (chkMailFile.Checked) Function.send_report(subject, content, recipients, name);
                         MessageBox.Show("Export effectué avec succès sur " + saveFile.FileName);
                         if (chkOpenFile.Checked) Process.Start(saveFile.FileName);
                     }

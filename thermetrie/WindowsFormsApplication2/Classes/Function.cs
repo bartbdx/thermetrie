@@ -54,11 +54,11 @@ namespace WindowsFormsApplication2.Classes
             return moy;
         }
 
-        internal static void send_report(string subject, string content, string recipients, String file)
+        internal static void send_report(string subject, string content, String file)
         {
             SmtpClient client = new SmtpClient("127.0.0.1", 25);
             client.EnableSsl = false;
-            //client.UseDefaultCredentials = false;
+            
             //client.Credentials = new NetworkCredential("philippe.lavielle@viacesi.fr", "Bykyp628");
 
             try
@@ -67,11 +67,11 @@ namespace WindowsFormsApplication2.Classes
                 MailMessage message = new MailMessage();
 
                 // Add receiver
-                message.To.Add(recipients);
+                message.To.Add(ReadSetting("mailExport"));
 
                 // Set sender
                 // In this case the same as the username
-                message.From = new MailAddress("thermetrie@gmail.com");
+                message.From = new MailAddress("no-reply@gmail.com");
 
                 // Set subject
                 message.Subject = subject;
