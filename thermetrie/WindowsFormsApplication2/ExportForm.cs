@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,26 +23,23 @@ namespace WindowsFormsApplication2
         {
             try
             {
+                if (!cbExcel.Checked && !cbPDF.Checked) throw new Exception("Choisir un format d'export");
                 MainForm main = (MainForm)this.ParentForm;
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.DefaultExt = cbPDF.Checked ? "pdf" : "csv";
+                String name = main.getSensorName();
+                name = Function.slugify(name + DateTime.Now);
+                if (main.getSensorName() == "") name = "allSensor" + DateTime.Now;
+                saveFile.FileName = name;
 
-                if (!cbExcel.Checked) return;
                 if (cbExcel.Checked)
                 {
-                    SaveFileDialog saveFile = new SaveFileDialog();
-
-                    saveFile.DefaultExt = "csv";
-
-                    String name = main.getSensorName();
-                    name = Function.slugify(name);
-                    if (main.getSensorName() == "") name = "allSensor";
-                    saveFile.FileName = name;
-
 
                     if (saveFile.ShowDialog() == DialogResult.OK)
                     {
                         String stream = "";
                         String sensorId = main.getSensorId();
-                        
+
                         DateTime start = main.getStartDate();
                         DateTime end = main.getEndDate();
 
@@ -90,65 +89,89 @@ namespace WindowsFormsApplication2
                 }
                 else if (cbPDF.Checked)
                 {
-                    String name = main.getSensorName();
-                    name = Function.slugify(name);
-                    if (main.getSensorName() == "") name = "allSensor";
-                    String sensorName = main.getSensorName();
-                    String stream = "";
-                    String sensorId = main.getSensorId();
-                    DateTime start = main.getStartDate();
-                    DateTime end = main.getEndDate();
-                    String sensorUID = null;
-                    //Selection des données et des capteurs liés
-                    String query = "SELECT s.label,s.uid,d.* from data d INNER JOIN sensor s ON s.id = d.sensor_id WHERE 1 ";
-                    //Ajout  filtre par capteur si un capteur est sélectionné
-                    if (sensorId != "") query += "AND sensor_id=@sensorId ";
-                    //Ajout date de début / date de fin
-                    query += " AND (data_date BETWEEN @start AND @end)";
-                    // Par ordre de date ascendante / capteur
-                    query += " ORDER BY d.data_date DESC,sensor_id";
-
-                    //Ajout des parametres échappés
-                    Dictionary<String, String> parameters = new Dictionary<string, string>();
-                    if (sensorId != "") parameters["@sensorId"] = sensorId;
-                    parameters["@start"] = start.ToString("yyyy-MM-dd HH:mm:ss");
-                    parameters["@end"] = end.ToString("yyyy-MM-dd HH:mm:ss");
-                    List<decimal> temp = new List<decimal>();
-                    List<decimal> humi = new List<decimal>();
-                    List<Dictionary<String, String>> results = null;
-                    results = Database.select(query, parameters);
-
-                    //Nom des colonnes sur la premiere ligne
-                    foreach (KeyValuePair<String, String> cell in results[0])
+                    if (saveFile.ShowDialog() == DialogResult.OK)
                     {
-                        stream += cell.Key + ";";
-                    }
+                        String sensorName = main.getSensorName();
+                        String stream = "";
+                        String sensorId = main.getSensorId();
+                        DateTime start = main.getStartDate();
+                        DateTime end = main.getEndDate();
+                        String sensorUID = null;
+                        //Selection des données et des capteurs liés
+                        String query = "SELECT s.label,s.uid,d.* from data d INNER JOIN sensor s ON s.id = d.sensor_id WHERE 1 ";
+                        //Ajout  filtre par capteur si un capteur est sélectionné
+                        if (sensorId != "") query += "AND sensor_id=@sensorId ";
+                        //Ajout date de début / date de fin
+                        query += " AND (data_date BETWEEN @start AND @end)";
+                        // Par ordre de date ascendante / capteur
+                        query += " ORDER BY d.data_date DESC,sensor_id";
 
-                    //Saut d'une ligne
-                    stream += Environment.NewLine;
+                        //Ajout des parametres échappés
+                        Dictionary<String, String> parameters = new Dictionary<string, string>();
+                        if (sensorId != "") parameters["@sensorId"] = sensorId;
+                        parameters["@start"] = start.ToString("yyyy-MM-dd HH:mm:ss");
+                        parameters["@end"] = end.ToString("yyyy-MM-dd HH:mm:ss");
+                        List<decimal> temp = new List<decimal>();
+                        List<decimal> humi = new List<decimal>();
+                        List<Dictionary<String, String>> results = null;
+                        results = Database.select(query, parameters);
 
-                    //Valeurs des lignes
-                    foreach (Dictionary<String, String> row in results)
-                    {
-                        //Toutes les valeurs des cellules de la ligne courante
-                        foreach (KeyValuePair<String, String> cell in row)
+                        //Nom des colonnes sur la premiere ligne
+                        foreach (KeyValuePair<String, String> cell in results[0])
                         {
-                            stream += cell.Value + ";";
+                            stream += cell.Key + ";";
                         }
+
+                        //Saut d'une ligne
                         stream += Environment.NewLine;
-                        temp.Add(decimal.Parse(row["temperature"]));
-                        humi.Add(decimal.Parse(row["humidity"]));
-                        sensorUID = row["uid"];
-                        
+
+                        //Valeurs des lignes
+                        foreach (Dictionary<String, String> row in results)
+                        {
+                            //Toutes les valeurs des cellules de la ligne courante
+                            foreach (KeyValuePair<String, String> cell in row)
+                            {
+                                stream += cell.Value + ";";
+                            }
+                            stream += Environment.NewLine;
+                            temp.Add(decimal.Parse(row["temperature"]));
+                            humi.Add(decimal.Parse(row["humidity"]));
+                            sensorUID = row["uid"];
+
+                        }
+                        String tempMin = Function.PlusPetiteValeur(temp).ToString(".") + " °";
+                        String tempMax = Function.PlusGrandeValeur(temp).ToString(".") + " °";
+                        String tempMoy = Function.valeurMoyenne(temp).ToString(".") + " °";
+                        String humiMin = Function.PlusPetiteValeur(humi).ToString(".") + " %";
+                        String humiMax = Function.PlusGrandeValeur(humi).ToString(".") + " %";
+                        String humiMoy = Function.valeurMoyenne(humi).ToString(".") + " %";
+
+                        FileStream fs = new FileStream(saveFile.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                        Document doc = new Document(PageSize.A4, 30, 30, 30, 30);
+                        doc.AddTitle("Rapport de relevés");
+
+                        doc.AddKeywords("Metadata, iTextSharp 5.5.11");
+                        doc.AddCreator("iTextSharp 5.5.11");
+                        doc.AddAuthor("Thermetrie");
+                        doc.AddHeader("Nothing", "No Header");
+                        Rectangle rec2 = new Rectangle(PageSize.A4);
+                        PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+                        doc.Open();
+                        doc.Add(new Paragraph("Rapport Temperature et Humidité"));
+                        doc.Add(new Paragraph("Date de rapport : " + DateTime.Now));
+                        List infos = new List();
+
+
+                        doc.Close();
+                        writer.Close();
+                        String subject = "Rapport relevé de temperatures et humidité";
+                        String content = " Bosses faineant !!!!";
+                        String recipients = "philippe.lavielle@viacesi.fr";
+                        fs.Close();
+                        Function.send_report(subject, content, recipients, "Rapport.pdf");
+                        MessageBox.Show("Export effectué avec succès sur " + saveFile.FileName);
+                        if (chkOpenFile.Checked) Process.Start(saveFile.FileName);
                     }
-                    String tempMin = Function.PlusPetiteValeur(temp).ToString(".") + " °";
-                    String tempMax = Function.PlusGrandeValeur(temp).ToString(".") + " °";
-                    String tempMoy = Function.valeurMoyenne(temp).ToString(".") + " °";
-                    String humiMin = Function.PlusPetiteValeur(humi).ToString(".") + " %";
-                    String humiMax = Function.PlusGrandeValeur(humi).ToString(".") + " %";
-                    String humiMoy = Function.valeurMoyenne(humi).ToString(".") + " %";
-
-
                 }
             }
             catch (MySqlException ex)
