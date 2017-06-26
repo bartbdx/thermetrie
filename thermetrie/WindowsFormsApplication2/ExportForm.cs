@@ -162,6 +162,7 @@ namespace WindowsFormsApplication2
                         PdfWriter writer = PdfWriter.GetInstance(doc, fs);
                         doc.Open();
                         doc.Add(new Paragraph("Rapport Temperature et Humidité"));
+                        doc.Add(new Paragraph(" "));
                         doc.Add(new Paragraph("Date de rapport : " + DateTime.Now));
                         List infos = new List();
                         infos.IndentationLeft = 20f;
@@ -178,7 +179,25 @@ namespace WindowsFormsApplication2
                         Image img = Image.GetInstance(main.synthesis.getChart().GetBuffer());
                         img.ScalePercent(75f);
                         doc.Add(img);
+                        doc.NewPage();
+                        PdfPTable table = new PdfPTable(8);
+                        table.WidthPercentage = 100;
 
+                        //Nom des colonnes sur la premiere ligne
+                        foreach (KeyValuePair<String, String> cell in results[0])
+                        {
+                            table.AddCell(new Phrase(cell.Key));
+                            table.HeaderRows = 1;
+                        }
+                        foreach (Dictionary<String, String> row in results)
+                        {
+                            //Toutes les valeurs des cellules de la ligne courante
+                            foreach (KeyValuePair<String, String> cell in row)
+                            {
+                               table.AddCell(new Phrase(cell.Value));
+                            }
+                        }
+                        doc.Add(table);
                         doc.Close();
                         writer.Close();
                         String subject = "Rapport relevé de temperatures et humidité";
