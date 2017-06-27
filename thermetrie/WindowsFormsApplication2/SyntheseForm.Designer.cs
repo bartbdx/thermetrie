@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.graph = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tempMax = new System.Windows.Forms.Label();
@@ -76,31 +76,31 @@
             // graph
             // 
             this.graph.BackColor = System.Drawing.Color.Transparent;
-            chartArea2.Area3DStyle.Enable3D = true;
-            chartArea2.Name = "ChartArea";
-            this.graph.ChartAreas.Add(chartArea2);
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.Name = "ChartArea";
+            this.graph.ChartAreas.Add(chartArea1);
             this.graph.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Alignment = System.Drawing.StringAlignment.Center;
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend2.MaximumAutoSize = 10F;
-            legend2.Name = "humLegend";
-            this.graph.Legends.Add(legend2);
+            legend1.Alignment = System.Drawing.StringAlignment.Center;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.MaximumAutoSize = 10F;
+            legend1.Name = "humLegend";
+            this.graph.Legends.Add(legend1);
             this.graph.Location = new System.Drawing.Point(0, 0);
             this.graph.Name = "graph";
-            series3.ChartArea = "ChartArea";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineRange;
-            series3.Legend = "humLegend";
-            series3.Name = "TempSeries";
-            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            series3.YValuesPerPoint = 2;
-            series3.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series4.ChartArea = "ChartArea";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series4.Legend = "humLegend";
-            series4.Name = "HumidSeries";
-            series4.YValuesPerPoint = 2;
-            this.graph.Series.Add(series3);
-            this.graph.Series.Add(series4);
+            series1.ChartArea = "ChartArea";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineRange;
+            series1.Legend = "humLegend";
+            series1.Name = "TempSeries";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            series1.YValuesPerPoint = 2;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series2.ChartArea = "ChartArea";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "humLegend";
+            series2.Name = "HumidSeries";
+            series2.YValuesPerPoint = 2;
+            this.graph.Series.Add(series1);
+            this.graph.Series.Add(series2);
             this.graph.Size = new System.Drawing.Size(617, 286);
             this.graph.TabIndex = 0;
             this.graph.Text = "chart1";
@@ -160,7 +160,7 @@
             this.tempMaxLabel.Location = new System.Drawing.Point(198, 0);
             this.tempMaxLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.tempMaxLabel.Name = "tempMaxLabel";
-            this.tempMaxLabel.Size = new System.Drawing.Size(37, 19);
+            this.tempMaxLabel.Size = new System.Drawing.Size(36, 18);
             this.tempMaxLabel.TabIndex = 2;
             this.tempMaxLabel.Text = "Max";
             // 
@@ -173,7 +173,7 @@
             this.tempMoyLabel.Location = new System.Drawing.Point(116, 0);
             this.tempMoyLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.tempMoyLabel.Name = "tempMoyLabel";
-            this.tempMoyLabel.Size = new System.Drawing.Size(38, 19);
+            this.tempMoyLabel.Size = new System.Drawing.Size(37, 18);
             this.tempMoyLabel.TabIndex = 1;
             this.tempMoyLabel.Text = "Moy";
             // 
@@ -186,7 +186,7 @@
             this.tempMinLabel.Location = new System.Drawing.Point(34, 0);
             this.tempMinLabel.MouseState = MaterialSkin.MouseState.HOVER;
             this.tempMinLabel.Name = "tempMinLabel";
-            this.tempMinLabel.Size = new System.Drawing.Size(34, 19);
+            this.tempMinLabel.Size = new System.Drawing.Size(33, 18);
             this.tempMinLabel.TabIndex = 0;
             this.tempMinLabel.Text = "Min";
             // 
@@ -206,7 +206,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Rockwell", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(41, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 18);
@@ -216,20 +216,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Rockwell", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(60, 31);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 18);
+            this.label4.Size = new System.Drawing.Size(45, 18);
             this.label4.TabIndex = 23;
             this.label4.Text = "Aux :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Rockwell", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(7, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 18);
+            this.label3.Size = new System.Drawing.Size(99, 18);
             this.label3.TabIndex = 22;
             this.label3.Text = "Periode du :";
             // 
@@ -282,20 +282,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Rockwell", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 18);
+            this.label2.Size = new System.Drawing.Size(138, 18);
             this.label2.TabIndex = 21;
             this.label2.Text = "Nom du capteur :";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Rockwell", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(15, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 18);
+            this.label1.Size = new System.Drawing.Size(127, 18);
             this.label1.TabIndex = 20;
             this.label1.Text = "Uid du capteur :";
             // 
@@ -388,7 +388,7 @@
             this.materialLabel1.Location = new System.Drawing.Point(203, 0);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(37, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(36, 18);
             this.materialLabel1.TabIndex = 2;
             this.materialLabel1.Text = "Max";
             // 
@@ -401,7 +401,7 @@
             this.materialLabel2.Location = new System.Drawing.Point(115, 0);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(38, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(37, 18);
             this.materialLabel2.TabIndex = 1;
             this.materialLabel2.Text = "Moy";
             // 
@@ -414,7 +414,7 @@
             this.materialLabel3.Location = new System.Drawing.Point(29, 0);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(34, 19);
+            this.materialLabel3.Size = new System.Drawing.Size(33, 18);
             this.materialLabel3.TabIndex = 0;
             this.materialLabel3.Text = "Min";
             // 
@@ -427,7 +427,7 @@
             this.materialLabel4.Location = new System.Drawing.Point(138, 164);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(78, 19);
+            this.materialLabel4.Size = new System.Drawing.Size(77, 18);
             this.materialLabel4.TabIndex = 6;
             this.materialLabel4.Text = "Humiditée";
             // 
@@ -440,7 +440,7 @@
             this.materialLabel5.Location = new System.Drawing.Point(417, 164);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
-            this.materialLabel5.Size = new System.Drawing.Size(94, 19);
+            this.materialLabel5.Size = new System.Drawing.Size(93, 18);
             this.materialLabel5.TabIndex = 7;
             this.materialLabel5.Text = "Température";
             // 

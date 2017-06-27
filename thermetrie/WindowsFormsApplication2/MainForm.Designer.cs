@@ -83,6 +83,7 @@
             // 
             this.btnConfiguration.Depth = 0;
             this.btnConfiguration.Location = new System.Drawing.Point(7, 194);
+            this.btnConfiguration.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnConfiguration.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnConfiguration.Name = "btnConfiguration";
             this.btnConfiguration.Primary = true;
@@ -96,6 +97,7 @@
             // 
             this.btnRapport.Depth = 0;
             this.btnRapport.Location = new System.Drawing.Point(7, 59);
+            this.btnRapport.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnRapport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnRapport.Name = "btnRapport";
             this.btnRapport.Primary = true;
@@ -109,6 +111,7 @@
             // 
             this.btnData.Depth = 0;
             this.btnData.Location = new System.Drawing.Point(7, 104);
+            this.btnData.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnData.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnData.Name = "btnData";
             this.btnData.Primary = true;
@@ -122,6 +125,7 @@
             // 
             this.btnImport.Depth = 0;
             this.btnImport.Location = new System.Drawing.Point(7, 149);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnImport.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnImport.Name = "btnImport";
             this.btnImport.Primary = true;
@@ -135,6 +139,7 @@
             // 
             this.btnSynthesis.Depth = 0;
             this.btnSynthesis.Location = new System.Drawing.Point(7, 14);
+            this.btnSynthesis.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnSynthesis.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSynthesis.Name = "btnSynthesis";
             this.btnSynthesis.Primary = true;

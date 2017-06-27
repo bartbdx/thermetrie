@@ -202,7 +202,7 @@ namespace WindowsFormsApplication2
                         writer.Close();
                         String subject = "Rapport relevé de temperatures et humidité";
                         String content = " Bosses faineant !!!!";
-                        String recipients = "philippe.lavielle@viacesi.fr";
+                        
                         fs.Close();
                         if (chkMailFile.Checked) Function.send_report(subject, content, name);
                         MessageBox.Show("Export effectué avec succès sur " + saveFile.FileName);
