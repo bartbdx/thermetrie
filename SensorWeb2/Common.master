@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#"  AutoEventWireup="true" CodeFile="Common.master.cs" Inherits="Common" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+</head>
+<body>
+    TITRE
+    MENU
+    <asp:ContentPlaceHolder id="Content" runat="server">
+        
+    </asp:ContentPlaceHolder>
+    FOOTER
+</body>
+</html>
