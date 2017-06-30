@@ -204,7 +204,7 @@ namespace WindowsFormsApplication2
                         String content = " Bosses faineant !!!!";
                         
                         fs.Close();
-                        if (chkMailFile.Checked) Function.send_report(subject, content, name);
+                        if (chkMailFile.Checked) Function.send_report(subject, content, saveFile.FileName);
                         MessageBox.Show("Export effectué avec succès sur " + saveFile.FileName);
                         if (chkOpenFile.Checked) Process.Start(saveFile.FileName);
                     }

@@ -56,10 +56,10 @@ namespace WindowsFormsApplication2.Classes
 
         internal static void send_report(string subject, string content, String file)
         {
-            SmtpClient client = new SmtpClient("127.0.0.1", 25);
-            client.EnableSsl = false;
+            SmtpClient client = new SmtpClient("127.0.0.1", 1025);
+            //client.EnableSsl = true;
             
-            //client.Credentials = new NetworkCredential("philippe.lavielle@viacesi.fr", "Bykyp628");
+            //client.Credentials = new NetworkCredential("philippe.lavielle@free.fr", "Velentino");
 
             try
             {
